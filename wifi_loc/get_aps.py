@@ -7,7 +7,6 @@ from pathlib import Path
 
 
 def scan_for_aps():
-    #password = b'x9hgw8iz2Ceoev%x\n'
     password = b'qwerty1234\n'
 
     proc = subprocess.Popen(['/home/joeyschwalb/PycharmProjects/wifi_loc/script.sh'],
