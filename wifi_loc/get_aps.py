@@ -2,14 +2,13 @@ import subprocess
 import pandas
 import hashlib
 import re
-import uuid
 from pathlib import Path
 
 
 def scan_for_aps():
-    /*
+    """
     Opens a subprocess to scan for wifi access points.
-    */
+    """
     password = b'qwerty1234\n'
 
     proc = subprocess.Popen(['/home/joeyschwalb/PycharmProjects/wifi_loc/script.sh'],
@@ -19,9 +18,9 @@ def scan_for_aps():
 
 
 def extract_aps(path_to_file):
-    /*
-    
-    */
+    """
+    Clean file containing info about wifi Access Points
+    """
     re_sig = re.compile('(signal: )')
     re_SSID = re.compile(('SSID: '))
 
@@ -55,28 +54,44 @@ def extract_aps(path_to_file):
 
 
 def avg_rssi(old_df, new_df):
+    """
+
+    :param old_df: dataframe containing power to be updated
+    :param new_df: dataframe containing power of latest visible access points
+    :return:
+    """
     return (old_df + new_df) / 2
 
 
 
 
 def check_file_size(fp):
+    """
+    Check if file contains more than 0 bytes
+
+    :param fp: filepath of input file
+    :return:
+    """
     while Path(fp).stat().st_size == 0:
         pass
     #print("File found, size: {0}".format(Path(fp).stat().st_size))
     return
 
 def sort_ap_tuple(tup):
+    """
+
+    :param tup: list of tuples
+    :return: sorted list of tuples by second value
+    """
+
     tup.sort(key=lambda x: x[1])
     return tup
 
 
 if __name__ == "__main__":
-    /*
+    """
     ap.txt contains visible wifi access points. The main function filters them by power, using 60dbm as a threshold.
-    
-    */
-    
+    """
     fp = "/home/joeyschwalb/PycharmProjects/wifi_loc/ap.txt"
     of = "/home/joeyschwalb/PycharmProjects/wifi_loc/filtered_ap.txt"
 

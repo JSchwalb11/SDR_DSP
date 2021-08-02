@@ -5,6 +5,10 @@ import time
 import json
 
 def parse_args():
+    """
+
+    :return: parsed arguments
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument("-a", "--args", default="", type=str)
     parser.add_argument("-o", "--output-file", type=str, default=991e5)
@@ -18,6 +22,10 @@ def parse_args():
     return parser.parse_args()
 
 def get_iq_991_fm():
+    """
+
+    :return: return raw samples from radio
+    """
     # args = parse_args()
     num_samps=int(10e6)
     freq=991e5
@@ -31,6 +39,12 @@ def get_iq_991_fm():
     return samps
 
 def extract_rssi(path="/home/joeyschwalb/PycharmProjects/SDR_DSP/IQ_data/991_fm.bin", debug=False):
+    """
+
+    :param path: static path to fm sample
+    :param debug: toggle True if you want to take samples live, False if you want to use samples from a file
+    :return: residual signal strength of observed station
+    """
     if not debug:
         file = open(path, 'r')
         signal = np.fromfile(file, dtype=np.complex64)
@@ -56,6 +70,11 @@ def extract_rssi(path="/home/joeyschwalb/PycharmProjects/SDR_DSP/IQ_data/991_fm.
 
 
 def main():
+    """
+    Collect samples of fm stations in area and extract signal strength from each one.
+
+    :return:
+    """
     args = parse_args()
     if args.debug == 'False':
         num_samps = int(10e6)
