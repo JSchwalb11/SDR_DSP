@@ -7,6 +7,9 @@ from pathlib import Path
 
 
 def scan_for_aps():
+    /*
+    Opens a subprocess to scan for wifi access points.
+    */
     password = b'qwerty1234\n'
 
     proc = subprocess.Popen(['/home/joeyschwalb/PycharmProjects/wifi_loc/script.sh'],
@@ -16,7 +19,9 @@ def scan_for_aps():
 
 
 def extract_aps(path_to_file):
-
+    /*
+    
+    */
     re_sig = re.compile('(signal: )')
     re_SSID = re.compile(('SSID: '))
 
@@ -67,6 +72,11 @@ def sort_ap_tuple(tup):
 
 
 if __name__ == "__main__":
+    /*
+    ap.txt contains visible wifi access points. The main function filters them by power, using 60dbm as a threshold.
+    
+    */
+    
     fp = "/home/joeyschwalb/PycharmProjects/wifi_loc/ap.txt"
     of = "/home/joeyschwalb/PycharmProjects/wifi_loc/filtered_ap.txt"
 
